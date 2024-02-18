@@ -26,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.silverstone.kahvedeneme3.Database.Asamalar
@@ -33,6 +34,7 @@ import com.silverstone.kahvedeneme3.ViewModel.ViewModel
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.silverstone.kahvedeneme3.AdMob.showInterstitialAd
 import com.silverstone.kahvedeneme3.R
 import com.silverstone.kahvedeneme3.Views.GifLoader
 import com.silverstone.kahvedeneme3.Views.SlideToTrigger
@@ -52,6 +54,7 @@ fun AsamaScreen(
     val currentAsama = asamalar.value.getOrNull(currentAsamaIndex.value)
     val description = currentAsama?.description ?: "Bilgi bulunamadı"
     val imageName = currentAsama?.image ?: "fkbas"
+    val context= LocalContext.current
 
 
 
@@ -118,8 +121,11 @@ fun AsamaScreen(
                 onTrigger = {
                     if (currentAsamaIndex.value < asamalar.value.size - 1)
                         currentAsamaIndex.value++
-                    else
+                    else{
+                        showInterstitialAd(context = context)
                         navController.navigate("bitis")
+
+                    }
                 }, GifLoader()
             )
         }

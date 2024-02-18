@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.silverstone.kahvedeneme3.Anasayfa
+import com.silverstone.kahvedeneme3.ComposableFunctions.About
 import com.silverstone.kahvedeneme3.ComposableFunctions.AvailableCoffees.ManageMevcut
 import com.silverstone.kahvedeneme3.ComposableFunctions.CoffeeDetails.AsamaScreen
 import com.silverstone.kahvedeneme3.ComposableFunctions.CoffeeDetails.BitisEkrani
@@ -16,7 +17,7 @@ import com.silverstone.kahvedeneme3.ComposableFunctions.CoffeeDetails.MalzemeChe
 import com.silverstone.kahvedeneme3.ViewModel.ViewModel
 
 @Composable
-fun SwitchPage(){
+fun SwitchPage(adStatus:Boolean){
 
     val viewModel:ViewModel= viewModel()
 
@@ -51,6 +52,10 @@ fun SwitchPage(){
 
         composable("aracMevcut"){
             ManageMevcut(navController = navController, viewModel = viewModel)
+        }
+
+        composable("About"){
+            About()
         }
     }
 }

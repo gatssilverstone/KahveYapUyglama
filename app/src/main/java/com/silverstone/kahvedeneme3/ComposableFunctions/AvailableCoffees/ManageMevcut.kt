@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.silverstone.kahvedeneme3.AdMob.showInterstitialAd
 import com.silverstone.kahvedeneme3.ComposableFunctions.CoffeeDetails.getImageResourceId
 import com.silverstone.kahvedeneme3.Database.ButunAraclar
 import com.silverstone.kahvedeneme3.R
@@ -98,7 +99,9 @@ fun ManageMevcut(navController: NavController,viewModel: ViewModel){
 
 
 
-        Button(onClick = {             viewModel.viewModelScope.launch {
+        Button(onClick = {
+            showInterstitialAd(context)
+                viewModel.viewModelScope.launch {
 
             viewModel.updateMevcut(selectedCheckboxes)
             viewModel.updateMevcutKahveler()

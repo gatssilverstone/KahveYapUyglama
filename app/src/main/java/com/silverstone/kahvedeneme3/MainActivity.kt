@@ -1,6 +1,9 @@
 package com.silverstone.kahvedeneme3
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -43,6 +46,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.silverstone.kahvedeneme3.AdMob.AdMobBanner
 import com.silverstone.kahvedeneme3.ComposableFunctions.CoffeeDetails.getImageResourceId
 import com.silverstone.kahvedeneme3.Database.ButunKahveler
 import com.silverstone.kahvedeneme3.ComposableFunctions.Fragment.SwitchPage
@@ -57,21 +67,72 @@ import com.silverstone.kahvedeneme3.ui.theme.Yesil
 import com.silverstone.kahvedeneme3.ui.theme.letter
 
 class MainActivity : ComponentActivity() {
+
+    private var mInterstitialAd: InterstitialAd? = null
+    private var adInterstitialId:String="ca-app-pub-3940256099942544/1033173712"
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            MobileAds.initialize(this)
             KahveDeneme3Theme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Bej
                 ) {
-                    SwitchPage()
+                    val adStatus = remember{ mutableStateOf(false) }
+                    SwitchPage(adStatus.value)
                 }
             }
         }
     }
+    fun  loadInterstitialAd(adStatus:(Boolean)->Unit){
+        var adRequest= AdRequest.Builder().build()
+        InterstitialAd.load(this,adInterstitialId, adRequest, object: InterstitialAdLoadCallback(){
+            override fun onAdFailedToLoad(error: LoadAdError) {
+                super.onAdFailedToLoad(error)
+                mInterstitialAd=null
+                Log.i("AD_TAG","onAdFailedToLoad: ${error.message}")
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                super.onAdLoaded(interstitialAd)
+                mInterstitialAd=interstitialAd
+                adStatus(true)
+                Log.i("AD_TAG","onAdFailedToLoad: ")
+
+            }
+        } )
+    }
+
+    fun showInterstitialAd(){
+        mInterstitialAd?.let {
+            it.fullScreenContentCallback=object : FullScreenContentCallback(){
+                override fun onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent()
+                    Log.i("AD_TAG","onAdDismissedFullScreenContent: ")
+                    mInterstitialAd=null
+                }
+
+                override fun onAdImpression() {
+                    super.onAdImpression()
+                    Log.i("AD_TAG","onAdImpression: ")
+                }
+
+                override fun onAdClicked() {
+                    super.onAdClicked()
+                }
+            }
+            it?.show(this)
+        }?:kotlin.run {
+            Toast.makeText(this,"Ad is null", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun Anasayfa(navController: NavController,viewModel: ViewModel) {
 
@@ -103,7 +164,7 @@ fun Anasayfa(navController: NavController,viewModel: ViewModel) {
                     Icon(painter = painterResource(id =R.drawable.tools ) , contentDescription = "", tint = Gold)
                 }
                 Spacer(modifier = Modifier.size(20.dp))
-                IconButton(onClick = {  },Modifier.size(35.dp)) {
+                IconButton(onClick = { navController.navigate("About") },Modifier.size(35.dp)) {
                     Icon(painter = painterResource(id =R.drawable.about ) , contentDescription = "", tint = Gold)
                 }
             }
@@ -123,10 +184,16 @@ fun Anasayfa(navController: NavController,viewModel: ViewModel) {
             uncheckedTrackColor = Gri))}}
 
         if (switchPosition.value==0) gosterilenKahveler.value=mevcutKahveler.value else gosterilenKahveler.value=butunKahveler.value
+        Column(modifier = Modifier.height(LocalConfiguration.current.screenHeightDp.dp-100.dp)) {
+
+
         if (gosterilenKahveler.value.isEmpty()){
             Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = "Yapabileceğiniz bir kahve yok...", fontFamily = letter, fontSize = 30.sp)
-                Image(painter = painterResource(id = R.drawable.sad) , contentDescription ="" ,Modifier.size(300.dp).padding(horizontal = 10.dp))
+                Image(painter = painterResource(id = R.drawable.sad) , contentDescription ="" ,
+                    Modifier
+                        .size(300.dp)
+                        .padding(horizontal = 10.dp))
                 Text(text = "Sahip olduğunuz araçları düzenleyin.", fontSize = 15.sp)
             }
 
@@ -249,7 +316,8 @@ fun Anasayfa(navController: NavController,viewModel: ViewModel) {
 
             }
         }
-
+        }
+        AdMobBanner()
 
 }
 }
