@@ -20,7 +20,7 @@ fun AdMobBanner() {
 
             AdView(it).apply {
                 setAdSize(AdSize.BANNER)
-                adUnitId="ca-app-pub-3940256099942544/6300978111"
+                adUnitId="ca-app-pub-5299418306105557/1291536339"
                 loadAd(AdRequest.Builder().build())
             }
         }

@@ -79,6 +79,8 @@ fun ManageMevcut(navController: NavController,viewModel: ViewModel){
             
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
 
+        val buttonSize = (0.03f * context.resources.displayMetrics.widthPixels).dp
+        val textSize=buttonSize.value.sp
 
 
         Button(onClick = {
@@ -87,13 +89,14 @@ fun ManageMevcut(navController: NavController,viewModel: ViewModel){
             colors = ButtonDefaults.buttonColors(disabledContainerColor = Color.Transparent, disabledContentColor = Color.Transparent,
                 contentColor = Color.Transparent, containerColor = Color.Transparent
             ),
-            modifier = Modifier.paint(painterResource( id =  R.drawable.buttonbg ))
+            modifier = Modifier.weight(0.3f)
+                .paint(painterResource( id =  R.drawable.buttonbg ))
 
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Image(painter = painterResource(id = R.drawable.home), contentDescription ="",Modifier.size(30.dp)
+                Image(painter = painterResource(id = R.drawable.home), contentDescription ="",Modifier.size(buttonSize)
                     , colorFilter = ColorFilter.tint(Gold))
-                Text(text = "Anasayfa", fontFamily = letter, fontSize = 30.sp, color = Gold)
+                Text(text = "Anasayfa", fontFamily = letter, fontSize = textSize, color = Gold)
             }
         }
 
@@ -112,13 +115,17 @@ fun ManageMevcut(navController: NavController,viewModel: ViewModel){
             colors = ButtonDefaults.buttonColors(disabledContainerColor = Color.Transparent, disabledContentColor = Color.Transparent,
                 contentColor = Color.Transparent, containerColor = Color.Transparent
             ),
-            modifier = Modifier.paint(painterResource( id =  R.drawable.buttonbg ))
+            modifier = Modifier
+                .weight(0.3f)
+                .paint(painterResource( id =  R.drawable.buttonbg ))
 
         ) {
+
+
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Image(painter = painterResource(id = R.drawable.upgrade), contentDescription ="",Modifier.size(30.dp)
+                Image(painter = painterResource(id = R.drawable.upgrade), contentDescription ="",Modifier.size(buttonSize)
                     , colorFilter = ColorFilter.tint(Gold))
-                Text(text = "Kaydet", fontFamily = letter, fontSize = 30.sp, color = Gold)
+                Text(text = "Kaydet", fontFamily = letter, fontSize = textSize, color = Gold)
             }
         }
 

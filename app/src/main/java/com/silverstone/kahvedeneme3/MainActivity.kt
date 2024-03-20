@@ -69,7 +69,7 @@ import com.silverstone.kahvedeneme3.ui.theme.letter
 class MainActivity : ComponentActivity() {
 
     private var mInterstitialAd: InterstitialAd? = null
-    private var adInterstitialId:String="ca-app-pub-3940256099942544/1033173712"
+    private var adInterstitialId:String="ca-app-pub-5299418306105557/8743006162"
 
 
 

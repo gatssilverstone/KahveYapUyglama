@@ -59,6 +59,7 @@ fun SlideToTrigger(onTrigger: () -> Unit, img: ImageLoader) {
                         offsetX.value = 0f
                         isTrig.value = true
                     }
+                    else if (offsetX.value<0f){offsetX.value=0f}
                 }
             }
     ) {
