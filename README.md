@@ -12,7 +12,8 @@ Kahve tarif verileri kullanıcıya yerel bir Room veritabanı kullanılarak sunu
 
 ## Kullanım
 
-Bu projeyi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyin:
+Bu projeyi bilgisayarınızda çalıştırmak için gereklilikleri edinmelisiniz.
+
 
 ### Gereklilikler
 
