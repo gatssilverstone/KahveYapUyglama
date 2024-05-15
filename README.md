@@ -12,7 +12,19 @@ Kahve tarif verileri kullanıcıya yerel bir Room veritabanı kullanılarak sunu
 
 ## Kullanım
 
-Projeyi bilgisayar üzerinde çalıştırabilmek için bir Kotlin derleyici ve Android emülatör gereklidir. 
+Bu projeyi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyin:
+
+### Gereklilikler
+
+Bir Kotlin derleyici (örneğin: [Android Studio](https://developer.android.com/studio?hl=tr) )
+
+Bir Android emülatör veya cihaz (örneğin: Genymotion, Pixel cihaz)
+
+### Notlar
+
+- Bu proje Android 33 (API seviyesi 33) ile test edilmiştir.
+
+- Daha eski Android sürümlerinde çalıştırmayı denemeden önce kodda gerekli değişiklikleri yapmanız gerekebilir.
 
 ## [Google Play](https://play.google.com/store/apps/details?id=com.silverstone.kahvedeneme3) 
 ## [İletişim](mailto:silverstone.dev1@gmail.com)
