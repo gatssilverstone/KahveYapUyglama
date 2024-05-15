@@ -14,7 +14,7 @@ Kahve tarif verileri kullanıcıya yerel bir Room veritabanı kullanılarak sunu
 
 Projeyi bilgisayar üzerinde çalıştırabilmek için bir Kotlin derleyici ve Android emülatör gereklidir. 
 
-## [Google Play](https://play-lh.googleusercontent.com/V7dPI1yAHTwOca1VdQ83-nBVZyKAQ3cTmixRpSjnh_WLOl9UPRQsDINYzAuOhAPlYQ=w2560-h1440-rw) 
+## [Google Play](https://play.google.com/store/apps/details?id=com.silverstone.kahvedeneme3) 
 ## [İletişim](mailto:silverstone.dev1@gmail.com)
 
 ![](https://play-lh.googleusercontent.com/EvdbMDOHLIPEsc-izW1Pu1VbN2Af7wRoDV0VVEDNCEMaeZ1sDUgEziU90varha-yE9o=w2560-h1440-rw)
